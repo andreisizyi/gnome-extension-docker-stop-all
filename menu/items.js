@@ -3,7 +3,7 @@ import {dockerStopAll} from '../actions/docker-stop.js';
 export function getMenuItems() {
     return [
         {
-            label: 'Stop All',
+            label: 'Stop All Containers',
             activate: dockerStopAll,
         },
         // {
