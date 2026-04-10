@@ -14,10 +14,14 @@ function addDisabledItem(menu, label) {
     menu.addMenuItem(item);
 }
 
-function addContainerInfoItem(menu, label) {
+function addContainerInfoItem(menu, label, isLast = false) {
     const item = new PopupMenu.PopupMenuItem(label);
     item.setSensitive(false);
     item.add_style_class_name('docker-hot-actions-container-item');
+
+    if (isLast)
+        item.add_style_class_name('docker-hot-actions-container-item-last');
+
     menu.addMenuItem(item);
 }
 
@@ -42,8 +46,15 @@ function sortContainersByName(containers) {
 }
 
 function renderContainerItems(menu, containers) {
-    for (const container of sortContainersByName(containers))
-        addContainerInfoItem(menu, container.name);
+    const sortedContainers = sortContainersByName(containers);
+
+    sortedContainers.forEach((container, index) => {
+        addContainerInfoItem(
+            menu,
+            container.name,
+            index === sortedContainers.length - 1
+        );
+    });
 }
 
 async function refreshIndicatorMenu(menu, refreshState) {
