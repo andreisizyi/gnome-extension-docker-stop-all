@@ -4,7 +4,7 @@ import {DockerHotActionsIndicator} from './ui/indicator.js';
 export default class DockerHotActionsExtension {
     enable() {
         this._indicator = new DockerHotActionsIndicator();
-        Main.panel.addToStatusArea('docker-hot-actions', this._indicator, 0, 'left');
+        Main.panel.addToStatusArea('docker-hot-actions', this._indicator, 1, 'left');
     }
 
     disable() {

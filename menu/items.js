@@ -1,14 +1,14 @@
-import {dockerStart, dockerStopAll} from '../actions/docker.js';
+import {dockerStopAll} from '../actions/docker-stop.js';
 
 export function getMenuItems() {
     return [
         {
-            label: 'Docker Stop All',
+            label: 'Stop All',
             activate: dockerStopAll,
         },
-        {
-            label: 'Docker Start',
-            activate: dockerStart,
-        },
+        // {
+        //    label: 'Start',
+        //    activate: dockerStart,
+        // },
     ];
 }

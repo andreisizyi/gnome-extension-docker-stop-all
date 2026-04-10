@@ -13,7 +13,7 @@ class DockerHotActionsIndicator extends PanelMenu.Button {
         super._init(0.0, 'Docker Hot Actions');
 
         const label = new St.Label({
-            text: 'hello',
+            text: 'Docker',
             y_align: Clutter.ActorAlign.CENTER,
         });
 
