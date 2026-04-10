@@ -4,9 +4,8 @@ import GObject from 'gi://GObject';
 import St from 'gi://St';
 
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
-import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
-import {getMenuItems} from '../menu/items.js';
+import {buildIndicatorMenu} from '../menu/items.js';
 
 const INDICATOR_ICON_NAME = 'package-x-generic-symbolic';
 const INDICATOR_ICON_PATH =
@@ -54,18 +53,6 @@ class DockerHotActionsIndicator extends PanelMenu.Button {
             this.add_style_class_name('docker-hot-actions-button');
 
         this.add_child(actor);
-        this._addMenuItems();
-    }
-
-    _addMenuItems() {
-        for (const itemConfig of getMenuItems()) {
-            const menuItem = new PopupMenu.PopupMenuItem(itemConfig.label);
-
-            menuItem.connect('activate', () => {
-                itemConfig.activate();
-            });
-
-            this.menu.addMenuItem(menuItem);
-        }
+        buildIndicatorMenu(this.menu);
     }
 });
