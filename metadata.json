@@ -2,5 +2,7 @@
   "uuid": "docker-hot-actions@andrei.local",
   "name": "Docker Hot Actions",
   "description": "Show hot actions for Docker.",
-  "shell-version": ["48"]
+  "shell-version": ["48"],
+  "url": "https://github.com/andreisizyi/gnome-extension-docker-stop-all",
+  "settings-schema": "org.gnome.shell.extensions.docker-hot-actions"
 }

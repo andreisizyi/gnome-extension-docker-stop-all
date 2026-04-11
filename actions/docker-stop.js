@@ -23,7 +23,6 @@ export async function dockerStopAll() {
         await execDockerCommand(['stop', ...containers.map(container => container.id)]);
         showNotification('Stopped running containers');
     } catch (error) {
-        console.error(error);
         showNotification(error.message);
     }
 }
