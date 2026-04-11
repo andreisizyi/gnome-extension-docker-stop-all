@@ -8,6 +8,8 @@ import {
 } from '../actions/docker-client.js';
 import {dockerStopAll} from '../actions/docker-stop.js';
 
+const STOP_ICON_NAME = 'media-playback-stop-symbolic';
+
 function addDisabledItem(menu, label) {
     const item = new PopupMenu.PopupMenuItem(label);
     item.setSensitive(false);
@@ -26,7 +28,14 @@ function addContainerInfoItem(menu, label, isLast = false) {
 }
 
 function addStopAllItem(menu) {
-    const stopAllItem = new PopupMenu.PopupMenuItem('Stop All Containers');
+    const stopAllItem = new PopupMenu.PopupImageMenuItem(
+        'Stop all containers',
+        STOP_ICON_NAME
+    );
+
+    const icon = stopAllItem.icon ?? stopAllItem._icon;
+    if (icon)
+        icon.icon_size = 14;
 
     stopAllItem.connect('activate', () => {
         void dockerStopAll();

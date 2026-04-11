@@ -1,5 +1,4 @@
 import Clutter from 'gi://Clutter';
-import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
@@ -7,38 +6,17 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 
 import {buildIndicatorMenu} from '../menu/items.js';
 
-const INDICATOR_ICON_NAME = 'package-x-generic-symbolic';
-const INDICATOR_ICON_PATH =
-    '/usr/share/icons/Adwaita/symbolic/mimetypes/package-x-generic-symbolic.svg';
-
-function getAvailableIconName() {
-    if (Gio.File.new_for_path(INDICATOR_ICON_PATH).query_exists(null))
-        return INDICATOR_ICON_NAME;
-
-    return null;
-}
+const INDICATOR_ICON_NAME = 'application-x-appliance-symbolic';
 
 function buildIndicatorActor() {
-    const iconName = getAvailableIconName();
-
-    if (iconName) {
-        return {
-            actor: new St.Icon({
-                icon_name: iconName,
-                icon_size: 16,
-                style_class: 'system-status-icon',
-                y_align: Clutter.ActorAlign.CENTER,
-            }),
-            isCompact: true,
-        };
-    }
-
     return {
-        actor: new St.Label({
-            text: 'Docker Control',
+        actor: new St.Icon({
+            icon_name: INDICATOR_ICON_NAME,
+            icon_size: 16,
+            style_class: 'system-status-icon',
             y_align: Clutter.ActorAlign.CENTER,
         }),
-        isCompact: false,
+        isCompact: true,
     };
 }
 
