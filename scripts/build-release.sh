@@ -24,6 +24,7 @@ cp "$ROOT_DIR/extension.js" "$STAGE_DIR/"
 cp "$ROOT_DIR/metadata.json" "$STAGE_DIR/"
 cp "$ROOT_DIR/prefs.js" "$STAGE_DIR/"
 cp "$ROOT_DIR/stylesheet.css" "$STAGE_DIR/"
+cp "$ROOT_DIR/LICENSE" "$STAGE_DIR/"
 
 cp "$ROOT_DIR/actions/"*.js "$STAGE_DIR/actions/"
 cp "$ROOT_DIR/menu/"*.js "$STAGE_DIR/menu/"

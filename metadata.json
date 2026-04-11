@@ -1,8 +1,8 @@
 {
-  "uuid": "docker-hot-actions@andreisizyi.github.io",
-  "name": "Docker Hot Actions",
-  "description": "Show hot actions for Docker.",
+  "uuid": "docker-stop-all@andreisizyi.github.io",
+  "name": "Docker Stop All",
+  "description": "Show running Docker containers and stop all running containers from the top panel menu.",
   "shell-version": ["48"],
   "url": "https://github.com/andreisizyi/gnome-extension-docker-stop-all",
-  "settings-schema": "org.gnome.shell.extensions.docker-hot-actions"
+  "settings-schema": "org.gnome.shell.extensions.docker-stop-all"
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.docker-hot-actions"
-          path="/org/gnome/shell/extensions/docker-hot-actions/">
+  <schema id="org.gnome.shell.extensions.docker-stop-all"
+          path="/org/gnome/shell/extensions/docker-stop-all/">
     <key name="docker-command" type="s">
       <default>''</default>
       <summary>Docker command or path</summary>
