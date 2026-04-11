@@ -4,11 +4,18 @@ import {
     DOCKER_NOT_RUNNING_MESSAGE,
     NO_RUNNING_CONTAINERS_MESSAGE,
     ensureDockerRunning,
+    getDockerUserMessage,
     listRunningContainers,
 } from '../actions/docker-client.js';
 import {dockerStopAll} from '../actions/docker-stop.js';
 
 const STOP_ICON_NAME = 'media-playback-stop-symbolic';
+const STOP_ICON_SIZE = 14;
+
+const MENU_LABELS = {
+    loading: 'Loading...',
+    stopAllContainers: 'Stop all containers',
+};
 
 function addDisabledItem(menu, label) {
     const item = new PopupMenu.PopupMenuItem(label);
@@ -29,13 +36,13 @@ function addContainerInfoItem(menu, label, isLast = false) {
 
 function addStopAllItem(menu) {
     const stopAllItem = new PopupMenu.PopupImageMenuItem(
-        'Stop all containers',
+        MENU_LABELS.stopAllContainers,
         STOP_ICON_NAME
     );
 
     const icon = stopAllItem.icon ?? stopAllItem._icon;
     if (icon)
-        icon.icon_size = 14;
+        icon.icon_size = STOP_ICON_SIZE;
 
     stopAllItem.connect('activate', () => {
         void dockerStopAll();
@@ -70,7 +77,7 @@ async function refreshIndicatorMenu(menu, refreshState) {
     const refreshVersion = refreshState.version;
 
     resetIndicatorMenu(menu);
-    addDisabledItem(menu, 'Loading...');
+    addDisabledItem(menu, MENU_LABELS.loading);
 
     try {
         await ensureDockerRunning();
@@ -92,10 +99,7 @@ async function refreshIndicatorMenu(menu, refreshState) {
             return;
 
         resetIndicatorMenu(menu);
-        addDisabledItem(
-            menu,
-            error.message || DOCKER_NOT_RUNNING_MESSAGE
-        );
+        addDisabledItem(menu, getDockerUserMessage(error, DOCKER_NOT_RUNNING_MESSAGE));
     }
 }
 
@@ -103,7 +107,7 @@ export function buildIndicatorMenu(menu) {
     const refreshState = {version: 0};
 
     resetIndicatorMenu(menu);
-    addDisabledItem(menu, 'Loading...');
+    addDisabledItem(menu, MENU_LABELS.loading);
 
     menu.connect('open-state-changed', (_menu, open) => {
         if (!open)

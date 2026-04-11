@@ -3,6 +3,9 @@ import Gio from 'gi://Gio';
 
 import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+const SETTINGS_KEY_DOCKER_COMMAND = 'docker-command';
+const PLACEHOLDER_DOCKER_COMMAND = 'docker';
+
 export default class DockerHotActionsPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         const settings = this.getSettings();
@@ -17,9 +20,9 @@ export default class DockerHotActionsPreferences extends ExtensionPreferences {
             title: 'Docker command or path',
         });
         if (typeof row.set_placeholder_text === 'function')
-            row.set_placeholder_text('docker');
+            row.set_placeholder_text(PLACEHOLDER_DOCKER_COMMAND);
 
-        settings.bind('docker-command', row, 'text', Gio.SettingsBindFlags.DEFAULT);
+        settings.bind(SETTINGS_KEY_DOCKER_COMMAND, row, 'text', Gio.SettingsBindFlags.DEFAULT);
 
         group.add(row);
         page.add(group);

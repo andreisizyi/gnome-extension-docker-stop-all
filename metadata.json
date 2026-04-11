@@ -1,5 +1,5 @@
 {
-  "uuid": "docker-hot-actions@andrei.local",
+  "uuid": "docker-hot-actions@andreisizyi.github.io",
   "name": "Docker Hot Actions",
   "description": "Show hot actions for Docker.",
   "shell-version": ["48"],

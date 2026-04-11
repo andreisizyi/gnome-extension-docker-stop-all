@@ -4,6 +4,7 @@ import GLib from 'gi://GLib';
 Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
 
 const DEFAULT_DOCKER_COMMAND = 'docker';
+const SETTINGS_KEY_DOCKER_COMMAND = 'docker-command';
 const RUNNING_CONTAINERS_FORMAT = '{{.ID}}\t{{.Names}}';
 
 let dockerSettings = null;
@@ -12,6 +13,15 @@ export const DOCKER_NOT_FOUND_MESSAGE = 'Docker CLI not found';
 export const DOCKER_COMMAND_INVALID_MESSAGE = 'Docker command from settings is invalid';
 export const DOCKER_NOT_RUNNING_MESSAGE = 'Docker is not running';
 export const NO_RUNNING_CONTAINERS_MESSAGE = 'No running containers';
+export const DOCKER_STOP_FAILED_MESSAGE = 'Failed to stop containers';
+
+const KNOWN_DOCKER_MESSAGES = new Set([
+    DOCKER_NOT_FOUND_MESSAGE,
+    DOCKER_COMMAND_INVALID_MESSAGE,
+    DOCKER_NOT_RUNNING_MESSAGE,
+    NO_RUNNING_CONTAINERS_MESSAGE,
+    DOCKER_STOP_FAILED_MESSAGE,
+]);
 
 export function setDockerSettings(settings) {
     dockerSettings = settings;
@@ -29,7 +39,7 @@ function resolveExecutable(command) {
 }
 
 function resolveDockerCommand() {
-    const fromSettings = dockerSettings?.get_string('docker-command')?.trim();
+    const fromSettings = dockerSettings?.get_string(SETTINGS_KEY_DOCKER_COMMAND)?.trim();
     if (fromSettings) {
         const discoveredFromSettings = resolveExecutable(fromSettings);
         return discoveredFromSettings;
@@ -43,7 +53,7 @@ function resolveDockerCommand() {
 }
 
 function getDockerCommandOrThrow() {
-    const fromSettings = dockerSettings?.get_string('docker-command')?.trim();
+    const fromSettings = dockerSettings?.get_string(SETTINGS_KEY_DOCKER_COMMAND)?.trim();
     const dockerCommand = resolveDockerCommand();
     if (!dockerCommand && fromSettings)
         throw new Error(DOCKER_COMMAND_INVALID_MESSAGE);
@@ -52,6 +62,15 @@ function getDockerCommandOrThrow() {
         throw new Error(DOCKER_NOT_FOUND_MESSAGE);
 
     return dockerCommand;
+}
+
+export function getDockerUserMessage(error, fallbackMessage) {
+    const message = typeof error?.message === 'string' ? error.message : '';
+
+    if (KNOWN_DOCKER_MESSAGES.has(message))
+        return message;
+
+    return fallbackMessage;
 }
 
 export async function execDockerCommand(argv) {
@@ -82,11 +101,7 @@ export async function ensureDockerRunning() {
     try {
         await execDockerCommand(['info']);
     } catch (error) {
-        if (error.message === DOCKER_NOT_FOUND_MESSAGE ||
-            error.message === DOCKER_COMMAND_INVALID_MESSAGE)
-            throw error;
-
-        throw new Error(DOCKER_NOT_RUNNING_MESSAGE);
+        throw new Error(getDockerUserMessage(error, DOCKER_NOT_RUNNING_MESSAGE));
     }
 }
 
