@@ -2,7 +2,7 @@
   "uuid": "docker-stop-all@andreisizyi.github.io",
   "name": "Docker Stop All",
   "description": "List running Docker containers and stop them from the top panel menu.",
-  "shell-version": ["48"],
+  "shell-version": ["46", "48"],
   "url": "https://github.com/andreisizyi/gnome-extension-docker-stop-all",
   "settings-schema": "org.gnome.shell.extensions.docker-stop-all"
 }
