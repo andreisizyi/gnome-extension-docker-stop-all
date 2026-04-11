@@ -4,11 +4,11 @@
           path="/org/gnome/shell/extensions/docker-stop-all/">
     <key name="docker-command" type="s">
       <default>''</default>
-      <summary>Docker command or path</summary>
+      <summary>Docker command</summary>
       <description>
-        Optional Docker executable override. Supports command name from PATH
+        Optional Docker command name
         (for example "docker") or absolute path (for example "/usr/bin/docker").
-        Empty value means automatic discovery in PATH.
+        Leave empty to discover the command from PATH automatically.
       </description>
     </key>
   </schema>

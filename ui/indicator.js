@@ -6,7 +6,7 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 
 import {buildIndicatorMenu} from '../menu/items.js';
 
-const INDICATOR_TITLE = 'Docker Hot Actions';
+const INDICATOR_TITLE = 'Docker Stop All';
 const INDICATOR_ICON_NAME = 'application-x-appliance-symbolic';
 const INDICATOR_ICON_SIZE = 16;
 

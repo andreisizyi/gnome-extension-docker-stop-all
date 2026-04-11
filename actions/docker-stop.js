@@ -8,7 +8,7 @@ import {
     listRunningContainers,
 } from './docker-client.js';
 
-const NOTIFICATION_TITLE = 'Docker Hot Actions';
+const NOTIFICATION_TITLE = 'Docker Stop All';
 const SUCCESS_STOPPED_MESSAGE = 'Stopped running containers';
 
 function showNotification(message) {

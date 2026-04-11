@@ -9,8 +9,8 @@ const RUNNING_CONTAINERS_FORMAT = '{{.ID}}\t{{.Names}}';
 
 let dockerSettings = null;
 
-export const DOCKER_NOT_FOUND_MESSAGE = 'Docker CLI not found';
-export const DOCKER_COMMAND_INVALID_MESSAGE = 'Docker command from settings is invalid';
+export const DOCKER_NOT_FOUND_MESSAGE = 'Docker command not found';
+export const DOCKER_COMMAND_INVALID_MESSAGE = 'Configured Docker command is invalid';
 export const DOCKER_NOT_RUNNING_MESSAGE = 'Docker is not running';
 export const NO_RUNNING_CONTAINERS_MESSAGE = 'No running containers';
 export const DOCKER_STOP_FAILED_MESSAGE = 'Failed to stop containers';

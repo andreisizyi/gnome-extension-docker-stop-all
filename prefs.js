@@ -13,11 +13,11 @@ export default class DockerHotActionsPreferences extends ExtensionPreferences {
         const page = new Adw.PreferencesPage();
         const group = new Adw.PreferencesGroup({
             title: 'Docker',
-            description: 'Optional override for Docker CLI command or absolute path.',
+            description: 'Optionally override the Docker command or absolute path.',
         });
 
         const row = new Adw.EntryRow({
-            title: 'Docker command or path',
+            title: 'Docker command',
         });
         if (typeof row.set_placeholder_text === 'function')
             row.set_placeholder_text(PLACEHOLDER_DOCKER_COMMAND);
