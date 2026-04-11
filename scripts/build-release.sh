@@ -31,8 +31,6 @@ cp "$ROOT_DIR/menu/"*.js "$STAGE_DIR/menu/"
 cp "$ROOT_DIR/ui/"*.js "$STAGE_DIR/ui/"
 cp "$ROOT_DIR/schemas/"*.xml "$STAGE_DIR/schemas/"
 
-glib-compile-schemas "$STAGE_DIR/schemas"
-
 (
     cd "$STAGE_DIR"
     zip -qr "$OUT_DIR/$UUID.shell-extension.zip" .
